@@ -1,7 +1,16 @@
 asgiref==3.7.2
+beautifulsoup4==4.12.3
+black==24.2.0
+click==8.1.7
 Django==4.2.11
 django-environ==0.11.2
+mypy-extensions==1.0.0
+packaging==24.0
+pathspec==0.12.1
 pillow==10.2.0
+platformdirs==4.2.0
 psycopg2-binary==2.9.9
+soupsieve==2.5
 sqlparse==0.4.4
+tomli==2.0.1
 typing_extensions==4.10.0

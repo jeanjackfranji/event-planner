@@ -2,22 +2,36 @@
 {% extends 'base.html' %}
 
 {% block content %}
-  <h2>{{ event.title }}</h2>
-  <p>Location: {{ event.location }}</p>
-  <p>Start Time: {{ event.startDateTime }}</p>
-  <p>End Time: {{ event.endDateTime }}</p>
-
-  <h3>Speakers</h3>
-  <ul>
-    {% for speaker in event.speakers.all %}
-      <li>{{ speaker.firstName }} {{ speaker.lastName }}</li>
-    {% endfor %}
-  </ul>
-
-  <h3>Sponsors</h3>
-  <ul>
-    {% for sponsor in event.sponsors.all %}
-      <li>{{ sponsor.name }}</li>
-    {% endfor %}
-  </ul>
+<h2>
+ {{ event.title }}
+</h2>
+<p>
+ Location: {{ event.location }}
+</p>
+<p>
+ Start Time: {{ event.startDateTime }}
+</p>
+<p>
+ End Time: {{ event.endDateTime }}
+</p>
+<h3>
+ Speakers
+</h3>
+<ul>
+ {% for speaker in event.speakers.all %}
+ <li>
+  {{ speaker.firstName }} {{ speaker.lastName }}
+ </li>
+ {% endfor %}
+</ul>
+<h3>
+ Sponsors
+</h3>
+<ul>
+ {% for sponsor in event.sponsors.all %}
+ <li>
+  {{ sponsor.name }}
+ </li>
+ {% endfor %}
+</ul>
 {% endblock %}

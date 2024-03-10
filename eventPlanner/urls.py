@@ -14,18 +14,28 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+
 from django.contrib import admin
 from django.urls import path
-from eventplannerdb.views import EventListView, EventDetailView, SurveyCreateView, EventAgendaCreateView, UserCheckInView, LoginView, LogoutView, SignupView
+from eventplannerdb.views import (
+    EventListView,
+    EventDetailView,
+    SurveyCreateView,
+    EventAgendaCreateView,
+    UserCheckInView,
+    LoginView,
+    LogoutView,
+    SignupView,
+)
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('events/', EventListView.as_view(), name='event_list'),
-    path('events/<int:pk>/', EventDetailView.as_view(), name='event_detail'),
-    path('survey/create/', SurveyCreateView.as_view(), name='survey_create'),
-    path('agenda/create/', EventAgendaCreateView.as_view(), name='agenda_create'),
-    path('checkin/create/', UserCheckInView.as_view(), name='checkin_create'),
-    path('login/', LoginView.as_view(), name='login'),
-    path('logout/', LogoutView.as_view(), name='logout'),
-    path('signup/', SignupView.as_view(), name='signup'),
+    path("admin/", admin.site.urls),
+    path("events/", EventListView.as_view(), name="event_list"),
+    path("events/<int:pk>/", EventDetailView.as_view(), name="event_detail"),
+    path("survey/create/", SurveyCreateView.as_view(), name="survey_create"),
+    path("agenda/create/", EventAgendaCreateView.as_view(), name="agenda_create"),
+    path("checkin/create/", UserCheckInView.as_view(), name="checkin_create"),
+    path("", LoginView.as_view(), name="login"),
+    path("logout/", LogoutView.as_view(), name="logout"),
+    path("signup/", SignupView.as_view(), name="signup"),
 ]

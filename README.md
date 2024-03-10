@@ -50,3 +50,5 @@ This Django project is designed for creating events, schedules, surveys and many
     ```python
     python manage.py createsuperuser
     ```
+
+8. Use pip freeze > requirements.txt to extract added libraries to requirements.txt
