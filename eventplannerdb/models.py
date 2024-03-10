@@ -14,7 +14,7 @@ class Event(models.Model):
 class Speaker(models.Model):
     firstName = models.CharField(max_length=255)
     lastName = models.CharField(max_length=255)
-    age = models.IntegerField
+    age = models.IntegerField()
     profession = models.CharField(max_length=255)
     bio = models.TextField()
 

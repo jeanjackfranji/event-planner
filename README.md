@@ -59,3 +59,9 @@ This Django project is designed for creating events, schedules, surveys and many
     HTML: python format_html.py
     Python: black .
     ```
+
+10. You can use the following script to add initial data into project:
+
+    ```python
+    python manage.py loaddata initial_data.json
+    ```
