@@ -52,3 +52,10 @@ This Django project is designed for creating events, schedules, surveys and many
     ```
 
 8. Use pip freeze > requirements.txt to extract added libraries to requirements.txt
+
+9. To format your code you can use:
+
+    ```python
+    HTML: python format_html.py
+    Python: black .
+    ```
