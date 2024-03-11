@@ -16,12 +16,16 @@ class Speaker(models.Model):
     lastName = models.CharField(max_length=255)
     age = models.IntegerField()
     profession = models.CharField(max_length=255)
+    contactNumber = models.CharField(max_length=255, default="")
+    email = models.EmailField(default="")
     bio = models.TextField()
+    icon = models.CharField(max_length=255, default="")
 
 
 class Sponsor(models.Model):
     name = models.CharField(max_length=255)
-    logo = models.ImageField(upload_to="sponsor_logos/")
+    website = models.URLField(default="")
+    companyLogo = models.CharField(max_length=255, default="")
 
 
 class Survey(models.Model):

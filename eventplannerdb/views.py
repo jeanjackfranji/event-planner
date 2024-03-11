@@ -22,6 +22,7 @@ class EventListView(ListView):
             events = Event.objects.filter(title__icontains=query)
         else:
             events = Event.objects.all()
+            query = "" # empty query if no search input is given
         # Render needed Data and View
         return render(request, "event_list.html", {"events": events, "query": query})
 
