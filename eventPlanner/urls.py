@@ -20,6 +20,7 @@ from django.urls import path
 from eventplannerdb.views import (
     EventListView,
     EventDetailView,
+    SpeakerDetailView,
     SurveyCreateView,
     EventAgendaCreateView,
     UserCheckInView,
@@ -32,6 +33,7 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     path("events/", EventListView.as_view(), name="event_list"),
     path("events/<int:pk>/", EventDetailView.as_view(), name="event_detail"),
+    path("speaker/<int:pk>/", SpeakerDetailView.as_view(), name="speaker_detail"),
     path("survey/create/", SurveyCreateView.as_view(), name="survey_create"),
     path("agenda/create/", EventAgendaCreateView.as_view(), name="agenda_create"),
     path("checkin/create/", UserCheckInView.as_view(), name="checkin_create"),
