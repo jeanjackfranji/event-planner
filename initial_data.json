@@ -10,7 +10,7 @@
             "email": "john.doe@sponsoreventplanner.com",
             "profession": "Software Engineer",
             "bio": "Experienced software engineer with a passion for Django development.",
-            "icon": "images/speaker/john.png"
+            "icon": "john.png"
         }
     },
     {
@@ -24,7 +24,7 @@
             "email": "jane.smith@sponsoreventplanner.com",
             "profession": "Data Scientist",
             "bio": "Data scientist specializing in machine learning and analytics.",
-            "icon": "images/speaker/jane.jpg"
+            "icon": "jane.jpg"
         }
     },
     {
@@ -32,7 +32,7 @@
         "pk": 1,
         "fields": {
             "name": "TechCorp",
-            "companyLogo": "images/company/techcorp.png",
+            "companyLogo": "techcorp.png",
             "website": "https://www.techcorp.com"
         }
     },
@@ -41,7 +41,7 @@
         "pk": 2,
         "fields": {
             "name": "InnovateCo",
-            "companyLogo": "images/company/innocateco.png",
+            "companyLogo": "innovateco.png",
             "website": "https://www.innovateco.com"
         }
     },
@@ -53,6 +53,7 @@
             "location": "Conference Center",
             "startDateTime": "2024-03-09T09:00:00Z",
             "endDateTime": "2024-03-09T18:00:00Z",
+            "description": "A summit focusing on the latest advancements in technology.",
             "speakers": [1, 2],
             "sponsors": [1, 2]
         }
@@ -65,6 +66,7 @@
             "location": "Conference Center",
             "startDateTime": "2024-03-10T09:00:00Z",
             "endDateTime": "2024-03-10T18:00:00Z",
+            "description": "Continuation of the Tech Summit series with more exciting discussions.",
             "speakers": [1, 2],
             "sponsors": [1, 2]
         }
@@ -77,6 +79,7 @@
             "location": "Exhibition Hall",
             "startDateTime": "2024-04-15T10:00:00Z",
             "endDateTime": "2024-04-15T16:00:00Z",
+            "description": "An exposition showcasing the latest trends in data science.",
             "speakers": [2],
             "sponsors": [1]
         }
@@ -89,6 +92,7 @@
             "location": "Training Center",
             "startDateTime": "2024-05-20T13:00:00Z",
             "endDateTime": "2024-05-20T17:00:00Z",
+            "description": "A hands-on workshop covering various aspects of web development.",
             "speakers": [1],
             "sponsors": [2]
         }
@@ -101,6 +105,7 @@
             "location": "Convention Center",
             "startDateTime": "2024-06-25T09:30:00Z",
             "endDateTime": "2024-06-25T17:30:00Z",
+            "description": "A conference exploring the applications and future of artificial intelligence.",
             "speakers": [1, 2],
             "sponsors": [1, 2]
         }
@@ -113,6 +118,7 @@
             "location": "Innovation Hub",
             "startDateTime": "2024-07-10T14:00:00Z",
             "endDateTime": "2024-07-10T18:00:00Z",
+            "description": "A day for startups to pitch their ideas and innovations.",
             "speakers": [2],
             "sponsors": [1]
         }

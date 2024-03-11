@@ -1,9 +1,10 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, get_object_or_404, redirect
 from django.views import View
 from django.views.generic import ListView, DetailView, CreateView
-from .models import Event, Survey, Speaker, EventAgenda, UserCheckIn
+from .models import Event, Survey, Speaker, EventAgenda
 from .forms import SurveyForm
-from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth import login, logout
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from django.views import View
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
@@ -32,6 +33,40 @@ class EventDetailView(DetailView):
     template_name = "event_detail.html"
     context_object_name = "event"
 
+@login_required  # Ensure the user is logged in to register
+def register_for_event(request, event_id):
+    event = get_object_or_404(Event, pk=event_id)
+
+    if request.user not in event.registered_users.all():
+        event.registered_users.add(request.user)
+        event.save()
+
+    return redirect('event_detail', pk=event_id)
+
+@login_required
+def deregister_from_event(request, event_id):
+    event = get_object_or_404(Event, pk=event_id)
+
+    if request.user in event.registered_users.all():
+        event.registered_users.remove(request.user)
+    
+    if request.user in event.checkedIn_users.all():
+        event.checkedIn_users.remove(request.user)
+    
+    event.save()
+    
+    return redirect('event_detail', pk=event_id)
+
+@login_required
+def check_in_to_event(request, event_id):
+    event = get_object_or_404(Event, pk=event_id)
+
+    if request.user not in event.checkedIn_users.all():
+        event.checkedIn_users.add(request.user)
+        event.save()
+    
+    return redirect('event_detail', pk=event_id)
+
 class SpeakerDetailView(DetailView):
     model = Speaker
     template_name = "speaker_detail.html"
@@ -49,14 +84,6 @@ class EventAgendaCreateView(CreateView):
     fields = ["event", "title", "start_time", "end_time"]
     template_name = "eventagenda_form.html"
     success_url = "/events/"  # Redirect to the event list after agenda creation
-
-
-class UserCheckInView(CreateView):
-    model = UserCheckIn
-    fields = ["user", "event"]
-    template_name = "usercheckin_form.html"
-    success_url = "/events/"  # Redirect to the event list after check-in
-
 
 class LoginView(View):
     def get(self, request):
