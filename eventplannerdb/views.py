@@ -23,7 +23,7 @@ class EventListView(ListView):
             events = Event.objects.filter(title__icontains=query)
         else:
             events = Event.objects.all()
-            query = "" # empty query if no search input is given
+            query = ""  # empty query if no search input is given
         # Render needed Data and View
         return render(request, "event_list.html", {"events": events, "query": query})
 
@@ -33,6 +33,7 @@ class EventDetailView(DetailView):
     template_name = "event_detail.html"
     context_object_name = "event"
 
+
 @login_required  # Ensure the user is logged in to register
 def register_for_event(request, event_id):
     event = get_object_or_404(Event, pk=event_id)
@@ -41,7 +42,8 @@ def register_for_event(request, event_id):
         event.registered_users.add(request.user)
         event.save()
 
-    return redirect('event_detail', pk=event_id)
+    return redirect("event_detail", pk=event_id)
+
 
 @login_required
 def deregister_from_event(request, event_id):
@@ -49,13 +51,14 @@ def deregister_from_event(request, event_id):
 
     if request.user in event.registered_users.all():
         event.registered_users.remove(request.user)
-    
+
     if request.user in event.checkedIn_users.all():
         event.checkedIn_users.remove(request.user)
-    
+
     event.save()
-    
-    return redirect('event_detail', pk=event_id)
+
+    return redirect("event_detail", pk=event_id)
+
 
 @login_required
 def check_in_to_event(request, event_id):
@@ -64,13 +67,15 @@ def check_in_to_event(request, event_id):
     if request.user not in event.checkedIn_users.all():
         event.checkedIn_users.add(request.user)
         event.save()
-    
-    return redirect('event_detail', pk=event_id)
+
+    return redirect("event_detail", pk=event_id)
+
 
 class SpeakerDetailView(DetailView):
     model = Speaker
     template_name = "speaker_detail.html"
     context_object_name = "speaker"
+
 
 class SurveyCreateView(CreateView):
     model = Survey
@@ -84,6 +89,7 @@ class EventAgendaCreateView(CreateView):
     fields = ["event", "title", "start_time", "end_time"]
     template_name = "eventagenda_form.html"
     success_url = "/events/"  # Redirect to the event list after agenda creation
+
 
 class LoginView(View):
     def get(self, request):
