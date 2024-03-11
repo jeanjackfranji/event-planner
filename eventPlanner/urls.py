@@ -17,18 +17,20 @@ Including another URLconf
 
 from django.contrib import admin
 from django.urls import path
-from eventplannerdb.views import (
+from eventplannerdb.views.events.event_views import (
     EventListView,
     EventDetailView,
     SpeakerDetailView,
     SurveyCreateView,
     EventAgendaCreateView,
-    LoginView,
-    LogoutView,
-    SignupView,
     register_for_event,
     deregister_from_event,
     check_in_to_event,
+)
+from eventplannerdb.views.auth.auth_views import (
+    LoginView,
+    LogoutView,
+    SignupView,
 )
 
 urlpatterns = [
