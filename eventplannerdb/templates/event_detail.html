@@ -4,141 +4,175 @@
 
 {% block content %}
 <div class="ui container">
-    <h2 class="ui header">
-        {{ event.title }}
-    </h2>
-    <div class="ui segments">
-        <div class="ui segment">
-            <h3 class="ui header">Event Details</h3>
-            <p>
-                <strong>Location:</strong> {{ event.location }}
-            </p>
-            <p>
-                <strong>Description:</strong> {{ event.description }}
-            </p>
-            <p>
-                <strong>Start Time:</strong> {{ event.startDateTime }}
-            </p>
-            <p>
-                <strong>End Time:</strong> {{ event.endDateTime }}
-            </p>
-        </div>
-
-        <div class="ui segment">
-            <h3 class="ui header">Speakers</h3>
-            <div class="ui list">
-                {% for speaker in event.speakers.all %}
-                    <div class="item">
-                        <img class="ui avatar image" src="{% static 'images/speaker/'|add:speaker.icon %}" alt="{{ speaker.firstName }} {{ speaker.lastName }} Avatar">
-                        <div class="content">
-                            <strong>{{ speaker.firstName }} {{ speaker.lastName }}</strong>
-                            <p>{{ speaker.bio }}</p>
-                        </div>
-                    </div>
-                {% endfor %}
-            </div>
-        </div>
-
-        <div class="ui segment">
-            <h3 class="ui header">Sponsors</h3>
-            <div class="ui list">
-                {% for sponsor in event.sponsors.all %}
-                    <div class="item">
-                        <img class="ui avatar image" src="{% static 'images/company/'|add:sponsor.companyLogo %}" alt="{{ sponsor.name }} Logo">
-                        <div class="content">
-                            <strong>{{ sponsor.name }}</strong>
-                            <p>Website: <a href="{{ sponsor.website }}" >{{ sponsor.website }}</a></p>
-                        </div>
-                    </div>
-                {% endfor %}
-            </div>
-        </div>
-
-        <!-- List of Checked-in Users (visible only to superadmins) -->
-        {% if request.user.is_superuser and event.registered_users.exists  %}
-
-        <div class="ui divider"></div>
-        <div class="ui grid">
-            <div class="eight wide column ml10 mb20">
-                <div class="ui segment">
-                    <h3 class="ui header">Registered Users</h3>
-                    <div class="ui list">
-                        {% for user in event.registered_users.all %}
-                            <div class="item">
-                                {{ user.username }}
-                            </div>
-                        {% endfor %}
-                    </div>
-                </div>
-            </div>
-            <!-- List of Checked-in Users (visible only to superadmins) -->
-            {% if request.user.is_superuser and event.checkedIn_users.exists  %}
-            <div class="eight wide column">
-                <div class="ui segment">
-                    <h3 class="ui header">Checked-in Users</h3>
-                    <div class="ui list">
-                    {% for user in event.checkedIn_users.all %}
-                        <div class="item">
-                            {{ user.username }}
-                        </div>
-                    {% endfor %}
-                </div>
-            </div>
-        </div>
-    {% endif %}
-
-        </div>
-        {% endif %}
-
-        <!-- Actions Segment -->
-        <div class="ui segment">
-            <h3 class="ui header">Actions</h3>
-            <div class="ui buttons">
-                <!-- Registration and De-registration Buttons -->
-                {% if request.user not in event.registered_users.all %}
-                    <form id="registrationForm" method="post" action="{% url 'register_for_event' event.id %}">
-                        {% csrf_token %}
-                        <button id="registerButton" class="ui primary button" type="submit">
-                            <i class="icon sign in"></i>
-                            Register for the Event
-                        </button>
-                    </form>
-                    <script>
-                        // JavaScript to handle loading indicator
+ <h2 class="ui header">
+  {{ event.title }}
+ </h2>
+ <div class="ui segments">
+  <div class="ui segment">
+   <h3 class="ui header">
+    Event Details
+   </h3>
+   <p>
+    <strong>
+     Location:
+    </strong>
+    {{ event.location }}
+   </p>
+   <p>
+    <strong>
+     Description:
+    </strong>
+    {{ event.description }}
+   </p>
+   <p>
+    <strong>
+     Start Time:
+    </strong>
+    {{ event.startDateTime }}
+   </p>
+   <p>
+    <strong>
+     End Time:
+    </strong>
+    {{ event.endDateTime }}
+   </p>
+  </div>
+  <div class="ui segment">
+   <h3 class="ui header">
+    Speakers
+   </h3>
+   <div class="ui list">
+    {% for speaker in event.speakers.all %}
+    <div class="item">
+     <img alt="{{ speaker.firstName }} {{ speaker.lastName }} Avatar" class="ui avatar image" src="{% static 'images/speaker/'|add:speaker.icon %}"/>
+     <div class="content">
+      <strong>
+       {{ speaker.firstName }} {{ speaker.lastName }}
+      </strong>
+      <p>
+       {{ speaker.bio }}
+      </p>
+     </div>
+    </div>
+    {% endfor %}
+   </div>
+  </div>
+  <div class="ui segment">
+   <h3 class="ui header">
+    Sponsors
+   </h3>
+   <div class="ui list">
+    {% for sponsor in event.sponsors.all %}
+    <div class="item">
+     <img alt="{{ sponsor.name }} Logo" class="ui avatar image" src="{% static 'images/company/'|add:sponsor.companyLogo %}"/>
+     <div class="content">
+      <strong>
+       {{ sponsor.name }}
+      </strong>
+      <p>
+       Website:
+       <a href="{{ sponsor.website }}">
+        {{ sponsor.website }}
+       </a>
+      </p>
+     </div>
+    </div>
+    {% endfor %}
+   </div>
+  </div>
+  <!-- List of Checked-in Users (visible only to superadmins) -->
+  {% if request.user.is_superuser and event.registered_users.exists  %}
+  <div class="ui divider">
+  </div>
+  <div class="ui grid">
+   <div class="eight wide column ml10 mb20">
+    <div class="ui segment">
+     <h3 class="ui header">
+      Registered Users
+     </h3>
+     <div class="ui list">
+      {% for user in event.registered_users.all %}
+      <div class="item">
+       {{ user.username }}
+      </div>
+      {% endfor %}
+     </div>
+    </div>
+   </div>
+   <!-- List of Checked-in Users (visible only to superadmins) -->
+   {% if request.user.is_superuser and event.checkedIn_users.exists  %}
+   <div class="eight wide column">
+    <div class="ui segment">
+     <h3 class="ui header">
+      Checked-in Users
+     </h3>
+     <div class="ui list">
+      {% for user in event.checkedIn_users.all %}
+      <div class="item">
+       {{ user.username }}
+      </div>
+      {% endfor %}
+     </div>
+    </div>
+   </div>
+   {% endif %}
+  </div>
+  {% endif %}
+  <!-- Actions Segment -->
+  <div class="ui segment">
+   <h3 class="ui header">
+    Actions
+   </h3>
+   <div class="ui buttons">
+    <!-- Registration and De-registration Buttons -->
+    {% if request.user not in event.registered_users.all %}
+    <form action="{% url 'register_for_event' event.id %}" id="registrationForm" method="post">
+     {% csrf_token %}
+     <button class="ui primary button" id="registerButton" type="submit">
+      <i class="icon sign in">
+      </i>
+      Register for the Event
+     </button>
+    </form>
+    <script>
+     // JavaScript to handle loading indicator
                         $('#registrationForm').submit(function() {
                             $('#registerButton').addClass('loading');
                         });
-                    </script>
-                {% else %}
+    </script>
+    {% else %}
                     {% if request.user not in event.checkedIn_users.all %}
-                    <form id="checkInForm" method="post" action="{% url 'check_in_to_event' event.id %}">
-                        {% csrf_token %}
-                        <button id="checkInButton" class="ui primary button" type="submit">
-                            <i class="icon check square outline"></i>
-                            Check-In
-                        </button>
-                    </form>
-                    <div class="or"></div>
-                    {% endif %}
-                    <form id="deregistrationForm" class=""  method="post" action="{% url 'deregister_from_event' event.id %}">
-                        {% csrf_token %}
-                        <button id="deregisterButton" class="ui negative button" type="submit">
-                            <i class="icon sign out"></i>
-                            Deregister from the Event
-                        </button>
-                    </form>
-                    <script>
-                        // JavaScript to handle loading indicator
+    <form action="{% url 'check_in_to_event' event.id %}" id="checkInForm" method="post">
+     {% csrf_token %}
+     <button class="ui primary button" id="checkInButton" type="submit">
+      <i class="icon check square outline">
+      </i>
+      Check-In
+     </button>
+    </form>
+    <div class="or">
+    </div>
+    {% endif %}
+    <form action="{% url 'deregister_from_event' event.id %}" class="" id="deregistrationForm" method="post">
+     {% csrf_token %}
+     <button class="ui negative button" id="deregisterButton" type="submit">
+      <i class="icon sign out">
+      </i>
+      Deregister from the Event
+     </button>
+    </form>
+    <script>
+     // JavaScript to handle loading indicator
                         $('#deregistrationForm').submit(function() {
                             $('#deregisterButton').addClass('loading');
                         });
                         $('#checkInForm').submit(function() {
                             $('#checkInButton').addClass('loading');
                         });
-                    </script>
-                {% endif %}
-            </div>
-        </div>
-    </div>
+    </script>
+    {% endif %}
+   </div>
+  </div>
+ </div>
 </div>
 {% endblock %}
