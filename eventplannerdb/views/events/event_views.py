@@ -1,13 +1,15 @@
 from django.shortcuts import get_object_or_404, redirect
 from django.views.generic import ListView, DetailView, CreateView
 from django.contrib.auth.decorators import login_required
-from ...models import Event, Survey, Speaker, EventAgenda
+from ...models import Event, Survey, Speaker, Agenda
 from ...forms import SurveyForm
+
 
 class EventListView(ListView):
     """
     Display an Event List View (showing all events and get method to filter on event name)
     """
+
     model = Event
     template_name = "event_list.html"
     context_object_name = "events"
@@ -34,10 +36,12 @@ class EventListView(ListView):
         context["query"] = self.request.GET.get("searchInput", "")
         return context
 
+
 class EventDetailView(DetailView):
     """
     Display an Event Detail View (showing more information on the event object)
     """
+
     model = Event
     template_name = "event_detail.html"
     context_object_name = "event"
@@ -94,9 +98,7 @@ class SurveyCreateView(CreateView):
 
 
 class EventAgendaCreateView(CreateView):
-    model = EventAgenda
+    model = Agenda
     fields = ["event", "title", "start_time", "end_time"]
     template_name = "eventagenda_form.html"
     success_url = "/events/"  # Redirect to the event list after agenda creation
-
-
