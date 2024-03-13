@@ -35,4 +35,6 @@ jobs:
         pylint eventplannerdb
     - name: Run tests and coverage report
       run: |       
-        python manage.py test
+        coverage run --data-file tests/.coverage manage.py test
+        coverage json --data-file tests/.coverage -o buf/tests/coverage.json
+        coverage report --data-file tests/.coverage
