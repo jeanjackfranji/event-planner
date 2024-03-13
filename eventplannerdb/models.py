@@ -1,6 +1,14 @@
 from django.db import models
 from django.contrib.auth.models import User
 
+CHOICES = [
+    (1, "Not Satisfied"),
+    (2, "Somewhat Satisfied"),
+    (3, "Neutral"),
+    (4, "Satisfied"),
+    (5, "Very Satisfied"),
+]
+
 
 class Event(models.Model):
     title = models.CharField(max_length=255)
@@ -31,21 +39,28 @@ class Sponsor(models.Model):
     companyLogo = models.CharField(max_length=255, default="")
 
 
-class Survey(models.Model):
-    event = models.ForeignKey(Event, on_delete=models.CASCADE)
-    question = models.CharField(max_length=255)
-    CHOICES = [
-        (1, "Not Satisfied"),
-        (2, "Somewhat Satisfied"),
-        (3, "Neutral"),
-        (4, "Satisfied"),
-        (5, "Very Satisfied"),
-    ]
-    user_response = models.IntegerField(choices=CHOICES)
-
-
-class EventAgenda(models.Model):
-    event = models.ForeignKey(Event, on_delete=models.CASCADE)
+class Agenda(models.Model):
+    event = models.ForeignKey(Event, on_delete=models.CASCADE, related_name="agenda")
     title = models.CharField(max_length=255)
     start_time = models.DateTimeField()
     end_time = models.DateTimeField()
+
+
+class Survey(models.Model):
+    event = models.ForeignKey(Event, on_delete=models.CASCADE, related_name="surveys")
+    title = models.CharField(max_length=255, default="")
+    methodology = models.TextField(default="")
+    is_anonymous = models.BooleanField(default=True)
+    is_active = models.BooleanField(default=True)
+
+
+class SurveyQuestion(models.Model):
+    survey = models.ForeignKey(Survey, on_delete=models.CASCADE, related_name="questions")
+    question = models.CharField(max_length=500, default="")
+    CHOICES = CHOICES
+
+
+class SurveyResponse(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    survey_question = models.ForeignKey("SurveyQuestion", on_delete=models.CASCADE)
+    response = models.IntegerField(choices=CHOICES)
