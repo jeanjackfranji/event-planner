@@ -1,7 +1,7 @@
 from django.test import TestCase
 from django.urls import reverse
 from django.contrib.auth.models import User
-from eventplannerdb.views import Event
+from eventplannerdb.views.events.event_views import Event
 
 
 class EventListViewTest(TestCase):
