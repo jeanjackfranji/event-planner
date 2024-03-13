@@ -16,7 +16,7 @@ This Django project is designed for creating events, schedules, surveys and many
 1. Create a Virtual Environment:
 
     ```python
-    python -m venv venv
+    python -m venv env
     ```
 
 2. Activate Virtual Environment:
