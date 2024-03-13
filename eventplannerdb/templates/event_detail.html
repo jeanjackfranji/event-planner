@@ -3,12 +3,11 @@
 {% load static %}
 
 {% block content %}
-
 <!-- Include Fomantic UI toast using messages rendered by backend -->
 {% if messages %}
 {% for message in messages %}
 <script>
-  $.toast({
+ $.toast({
     class: '{{ message.tags }}',
     position: 'bottom right',
     message: '{{ message }}'
@@ -16,7 +15,7 @@
   ;
 </script>
 {% endfor %}
-{% endif %} 
+{% endif %}
 <div class="ui stackable grid container">
  <div class="sixteen wide column centered">
   <h5 class="ui center aligned icon header">
@@ -30,7 +29,7 @@
 </div>
 <div class="ui container">
  <h2 class="ui header">
-  {{ event.title }}  
+  {{ event.title }}
  </h2>
  <div class="ui top attached tabular menu">
   <a class="item active" data-tab="event-details">
@@ -192,9 +191,13 @@
       <div class="item">
        {{ user.username }} | checked-in? 
        {% if user in event.checkedIn_users.all %}
-        <i class="check icon" style="color:green;"></i> <!-- Green check icon -->
+       <i class="check icon" style="color:green;">
+       </i>
+       <!-- Green check icon -->
        {% else %}
-        <i class="times icon" style="color:red;"></i> <!-- Red x icon -->
+       <i class="times icon" style="color:red;">
+       </i>
+       <!-- Red x icon -->
        {% endif %}
       </div>
       {% endfor %}
@@ -209,19 +212,21 @@
       Checked-in Users
      </h3>
      <div class="ui list">
-        {% for checkin in event.checkin_set.all %}
-        <div class="item">
-            <strong>{{ checkin.user.username }}</strong> - Check-in Time: {{ checkin.checkin_time }}
-        </div>
-        {% endfor %}
-        </div>
+      {% for checkin in event.checkin_set.all %}
+      <div class="item">
+       <strong>
+        {{ checkin.user.username }}
+       </strong>
+       - Check-in Time: {{ checkin.checkin_time }}
+      </div>
+      {% endfor %}
      </div>
     </div>
    </div>
-   {% endif %}
   </div>
   {% endif %}
  </div>
+ {% endif %}
 </div>
 <script>
  // Activate tab switching behavior
