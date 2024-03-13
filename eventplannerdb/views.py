@@ -1,34 +1,46 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.views import View
 from django.views.generic import ListView, DetailView, CreateView
-from .models import Event, Survey, Speaker, EventAgenda
-from .forms import SurveyForm
 from django.contrib.auth import login, logout
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import render, redirect
-from django.views import View
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
-
+from .models import Event, Survey, Speaker, EventAgenda
+from .forms import SurveyForm
 
 class EventListView(ListView):
+    """
+    Display an Event List View (showing all events and get method to filter on event name)
+    """
     model = Event
     template_name = "event_list.html"
     context_object_name = "events"
 
-    def get(self, request):
+    def get(self, request, *args, **kwargs):
+        """
+        Get the queryset based on the search input.
+        """
         # Get Query search from search input
-        query = request.GET.get("searchInput")
+        query = request.GET.get("searchInput", "")
         # Filter on Events
         if query:
-            events = Event.objects.filter(title__icontains=query)
+            self.queryset = Event.objects.filter(title__icontains=query)
         else:
-            events = Event.objects.all()
-            query = ""  # empty query if no search input is given
-        # Render needed Data and View
-        return render(request, "event_list.html", {"events": events, "query": query})
+            self.queryset = Event.objects.all()
 
+        return super().get(request, *args, **kwargs)
+
+    def get_context_data(self, **kwargs):
+        """
+        Add the search query to the context data.
+        """
+        context = super().get_context_data(**kwargs)
+        context["query"] = self.request.GET.get("searchInput", "")
+        return context
 
 class EventDetailView(DetailView):
+    """
+    Display an Event Detail View (showing more information on the event object)
+    """
     model = Event
     template_name = "event_detail.html"
     context_object_name = "event"
