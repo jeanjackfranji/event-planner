@@ -36,13 +36,13 @@
           <div class="item">
             <div class="right floated content">
               <a class="header" href="{% url 'event_detail' pk=event.pk %}">
-                <button class="circular ui icon button">
-                  <i class="icon sign out alternate"></i>
+                <button class="circular ui icon button" data-tooltip="See more details" data-position="top center">
+                  <i class="eye icon"></i>
                 </button>
                </a>
             </div>
            <div class="content">
-            <a class="header" href="#">
+            <a class="header" href="{% url 'event_detail' pk=event.pk %}">
              {{ event.title }}
             </a>
             <div class="location mt10">
