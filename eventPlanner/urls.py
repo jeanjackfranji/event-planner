@@ -28,16 +28,16 @@ from eventplannerdb.views import (
     SignupView,
     register_for_event,
     deregister_from_event,
-    check_in_to_event
+    check_in_to_event,
 )
 
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("events/", EventListView.as_view(), name="event_list"),
     path("events/<int:pk>/", EventDetailView.as_view(), name="event_detail"),
-    path('events/<int:event_id>/register/', register_for_event, name='register_for_event'),
-    path('events/<int:event_id>/deregister/', deregister_from_event, name='deregister_from_event'),
-    path('events/<int:event_id>/checkin/', check_in_to_event, name='check_in_to_event'),
+    path("events/<int:event_id>/register/", register_for_event, name="register_for_event"),
+    path("events/<int:event_id>/deregister/", deregister_from_event, name="deregister_from_event"),
+    path("events/<int:event_id>/checkin/", check_in_to_event, name="check_in_to_event"),
     path("speaker/<int:pk>/", SpeakerDetailView.as_view(), name="speaker_detail"),
     path("survey/create/", SurveyCreateView.as_view(), name="survey_create"),
     path("agenda/create/", EventAgendaCreateView.as_view(), name="agenda_create"),
