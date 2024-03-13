@@ -5,77 +5,86 @@
 
 {% block content %}
 <div class="ui stackable grid container">
-    <!-- Row containing Logo and Page Name-->
-    <div class="row">
-      <div class="sixteen wide column centered">
-        <h5 class="ui center aligned icon header">
-          <i class="large calendar alternate outline icon"></i>
-          <span>Events</span>
-        </h5>
-      </div>
-    </div>
-    <!-- Row containing search bar-->
-    <div class="row">
-      <div class="ten wide column centered"></div>
-      <div class="six wide column right aligned" style="margin-right: 20px;">
-        <div class="ui search">
-          <form action="{% url 'event_list' %}" class="ui icon input" method="get">
-           <input class="prompt" name="searchInput" placeholder="Search events..." type="text" value="{{ query }}"/>
-           <i class="search icon">
-           </i>
-          </form>
-         </div>
-      </div>
-    </div>
-    <!-- Row containing list items of events-->
-    <div class="row">
-      <div class="sixteen wide column centered">
-        <div class="ui relaxed celled divided list">
-          {% if events %}
+ <!-- Row containing Logo and Page Name-->
+ <div class="row">
+  <div class="sixteen wide column centered">
+   <h5 class="ui center aligned icon header">
+    <i class="large calendar alternate outline icon">
+    </i>
+    <span>
+     Events
+    </span>
+   </h5>
+  </div>
+ </div>
+ <!-- Row containing search bar-->
+ <div class="row">
+  <div class="ten wide column centered">
+  </div>
+  <div class="six wide column right aligned" style="margin-right: 20px;">
+   <div class="ui search">
+    <form action="{% url 'event_list' %}" class="ui icon input" method="get">
+     <input class="prompt" name="searchInput" placeholder="Search events..." type="text" value="{{ query }}"/>
+     <i class="search icon">
+     </i>
+    </form>
+   </div>
+  </div>
+ </div>
+ <!-- Row containing list items of events-->
+ <div class="row">
+  <div class="sixteen wide column centered">
+   <div class="ui relaxed celled divided list">
+    {% if events %}
           {% for event in events %}
-          <div class="item">
-            <div class="right floated content">
-              <a class="header" href="{% url 'event_detail' pk=event.pk %}">
-                <button class="circular ui icon button" data-tooltip="See more details" data-position="top center">
-                  <i class="eye icon"></i>
-                </button>
-               </a>
-            </div>
-           <div class="content">
-            <a class="header" href="{% url 'event_detail' pk=event.pk %}">
-             {{ event.title }}
-            </a>
-            <div class="location mt10">
-             Location: {{ event.location }}
-            </div>
-            <div class="meta mt10">
-             {{ event.startDateTime }} - {{ event.endDateTime }}
-            </div>
-            {% if event.speakers %}
-            <div class="mt10 mb10">
-              <span>Speakers: </span>
-              {% for speaker in event.speakers.all %}
-              <div class="ui very relaxed horizontal list">
-                <div class="item ml10">
-                  <img class="ui avatar image" src="{% static 'images/speaker/'|add:speaker.icon %}">
-                  <div class="content">
-                    <a class="header" href="{% url 'speaker_detail' pk=speaker.pk %}">{{ speaker.firstName }} {{ speaker.lastName }}</a>
-                  </div>
-                </div>
-              </div>
-              {% endfor %}
-            </div>
-            {% endif %}
-           </div>
-          </div>
-          {% endfor %}
-          {% else %}
-          <p class="ui center aligned">
-           No events found.
-          </p>
-          {% endif %}
-         </div>
+    <div class="item">
+     <div class="right floated content">
+      <a class="header" href="{% url 'event_detail' pk=event.pk %}">
+       <button class="circular ui icon button" data-position="top center" data-tooltip="See more details">
+        <i class="eye icon">
+        </i>
+       </button>
+      </a>
+     </div>
+     <div class="content">
+      <a class="header" href="{% url 'event_detail' pk=event.pk %}">
+       {{ event.title }}
+      </a>
+      <div class="location mt10">
+       Location: {{ event.location }}
       </div>
+      <div class="meta mt10">
+       {{ event.startDateTime }} - {{ event.endDateTime }}
+      </div>
+      {% if event.speakers %}
+      <div class="mt10 mb10">
+       <span>
+        Speakers:
+       </span>
+       {% for speaker in event.speakers.all %}
+       <div class="ui very relaxed horizontal list">
+        <div class="item ml10">
+         <img class="ui avatar image" src="{% static 'images/speaker/'|add:speaker.icon %}"/>
+         <div class="content">
+          <a class="header" href="{% url 'speaker_detail' pk=speaker.pk %}">
+           {{ speaker.firstName }} {{ speaker.lastName }}
+          </a>
+         </div>
+        </div>
+       </div>
+       {% endfor %}
+      </div>
+      {% endif %}
+     </div>
     </div>
+    {% endfor %}
+          {% else %}
+    <p class="ui center aligned">
+     No events found.
+    </p>
+    {% endif %}
+   </div>
+  </div>
+ </div>
 </div>
 {% endblock %}
