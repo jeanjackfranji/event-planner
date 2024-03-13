@@ -1,0 +1,13 @@
+<!-- speaker_detail.html -->
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<h1>{{ speaker.firstName }} {{ speaker.lastName }}</h1>
+<p>Age: {{ speaker.age }}</p>
+<p>Profession: {{ speaker.profession }}</p>
+<p>Contact Number: {{ speaker.contactNumber }}</p>
+<p>Email: {{ speaker.email }}</p>
+<p>Bio: {{ speaker.bio }}</p>
+<img class="ui avatar image" src="{% static 'images/speaker/'|add:speaker.icon %}" alt="{{ speaker.firstName }} {{ speaker.lastName }} Avatar">
+{% endblock %}

@@ -1,16 +1,20 @@
 <!-- event_list.html -->
 {% extends 'base.html' %}
+{% load static %}
+
 
 {% block content %}
-<div class="ui grid">
+<div class="ui stackable grid container">
+    <!-- Row containing Logo and Page Name-->
     <div class="row">
       <div class="sixteen wide column centered">
-        <h4 class="ui center aligned icon header">
-          <i class="calendar purple alternate outline icon"></i>
-          <span style="color: purple !important;">Events</span>
-        </h4>
+        <h5 class="ui center aligned icon header">
+          <i class="large calendar alternate outline icon"></i>
+          <span>Events</span>
+        </h5>
       </div>
     </div>
+    <!-- Row containing search bar-->
     <div class="row">
       <div class="ten wide column centered"></div>
       <div class="six wide column right aligned" style="margin-right: 20px;">
@@ -23,26 +27,45 @@
          </div>
       </div>
     </div>
+    <!-- Row containing list items of events-->
     <div class="row">
-      <div class="one wide column"></div>
-      <div class="fourteen wide column">
-        <div class="ui divided items">
+      <div class="sixteen wide column centered">
+        <div class="ui relaxed celled divided list">
           {% if events %}
           {% for event in events %}
           <div class="item">
+            <div class="right floated content">
+              <a class="header" href="{% url 'event_detail' pk=event.pk %}">
+                <button class="circular ui icon button">
+                  <i class="icon sign out alternate"></i>
+                </button>
+               </a>
+            </div>
            <div class="content">
             <a class="header" href="#">
              {{ event.title }}
             </a>
-            <div class="description">
-             {{ event.description }}
+            <div class="location mt10">
+             Location: {{ event.location }}
             </div>
-            <div class="meta">
-             {{ event.start_datetime }} - {{ event.end_datetime }}
+            <div class="meta mt10">
+             {{ event.startDateTime }} - {{ event.endDateTime }}
             </div>
-            <a href="{% url 'event_detail' pk=event.pk %}">
-             {{ event.title }}
-            </a>
+            {% if event.speakers %}
+            <div class="mt10 mb10">
+              <span>Speakers: </span>
+              {% for speaker in event.speakers.all %}
+              <div class="ui very relaxed horizontal list">
+                <div class="item ml10">
+                  <img class="ui avatar image" src="{% static 'images/speaker/'|add:speaker.icon %}">
+                  <div class="content">
+                    <a class="header" href="{% url 'speaker_detail' pk=speaker.pk %}">{{ speaker.firstName }} {{ speaker.lastName }}</a>
+                  </div>
+                </div>
+              </div>
+              {% endfor %}
+            </div>
+            {% endif %}
            </div>
           </div>
           {% endfor %}
@@ -53,7 +76,6 @@
           {% endif %}
          </div>
       </div>
-      <div class="one wide column"></div>
     </div>
 </div>
 {% endblock %}

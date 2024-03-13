@@ -1,7 +1,7 @@
-from django.shortcuts import render, get_object_or_404, redirect
+from django.shortcuts import render, redirect
 from django.views import View
 from django.views.generic import ListView, DetailView, CreateView
-from .models import Event, Survey, EventAgenda, UserCheckIn
+from .models import Event, Survey, Speaker, EventAgenda, UserCheckIn
 from .forms import SurveyForm
 from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import render, redirect
@@ -32,6 +32,10 @@ class EventDetailView(DetailView):
     template_name = "event_detail.html"
     context_object_name = "event"
 
+class SpeakerDetailView(DetailView):
+    model = Speaker
+    template_name = "speaker_detail.html"
+    context_object_name = "speaker"
 
 class SurveyCreateView(CreateView):
     model = Survey
