@@ -6,8 +6,11 @@
             "firstName": "John",
             "lastName": "Doe",
             "age": 35,
+            "contactNumber": "+111-123-4356-7890",
+            "email": "john.doe@sponsoreventplanner.com",
             "profession": "Software Engineer",
-            "bio": "Experienced software engineer with a passion for Django development."
+            "bio": "Experienced software engineer with a passion for Django development.",
+            "icon": "images/speaker/john.png"
         }
     },
     {
@@ -17,8 +20,11 @@
             "firstName": "Jane",
             "lastName": "Smith",
             "age": 28,
+            "contactNumber": "+111-523-4456-7890",
+            "email": "jane.smith@sponsoreventplanner.com",
             "profession": "Data Scientist",
-            "bio": "Data scientist specializing in machine learning and analytics."
+            "bio": "Data scientist specializing in machine learning and analytics.",
+            "icon": "images/speaker/jane.jpg"
         }
     },
     {
@@ -26,7 +32,8 @@
         "pk": 1,
         "fields": {
             "name": "TechCorp",
-            "logo": "techcorp_logo.png"
+            "companyLogo": "images/company/techcorp.png",
+            "website": "https://www.techcorp.com"
         }
     },
     {
@@ -34,7 +41,8 @@
         "pk": 2,
         "fields": {
             "name": "InnovateCo",
-            "logo": "innovateco_logo.png"
+            "companyLogo": "images/company/innocateco.png",
+            "website": "https://www.innovateco.com"
         }
     },
     {
