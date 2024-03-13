@@ -2,10 +2,36 @@
 {% extends 'base.html' %}
 
 {% block content %}
-  <h2>Login</h2>
-  <form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Login</button>
+<div class="ui middle aligned center aligned grid logo">
+ <div class="column">
+  <h2 class="ui purple" style="margin-top: 30%">
+   <img class="ui large circular image" src="static/images/logo.png"/>
+   <div class="content" style="margin-top: 10px; margin-bottom: 30px;">
+    Log-in to your account
+   </div>
+  </h2>
+  <form action="{% url 'login' %}" class="ui large form" method="post">
+   {% csrf_token %}
+   <div class="ui stacked segment">
+    {% for field in form %}
+    <div class="form-field">
+     {{ field.label_tag }} {{ field }}
+     {% if field.errors %}
+     <div class="ui error message">
+      {{ field.errors|striptags }}
+     </div>
+     {% endif %}
+    </div>
+    {% endfor %}
+   </div>
+   <input class="ui fluid large purple submit button" type="submit" value="Submit"/>
+   <div class="ui message">
+    New to us?
+    <a href="{% url 'signup' %}">
+     Sign Up
+    </a>
+   </div>
   </form>
+ </div>
+</div>
 {% endblock %}

@@ -15,69 +15,152 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
-            name='Event',
+            name="Event",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('title', models.CharField(max_length=255)),
-                ('location', models.CharField(max_length=255)),
-                ('startDateTime', models.DateTimeField()),
-                ('endDateTime', models.DateTimeField()),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("title", models.CharField(max_length=255)),
+                ("location", models.CharField(max_length=255)),
+                ("startDateTime", models.DateTimeField()),
+                ("endDateTime", models.DateTimeField()),
             ],
         ),
         migrations.CreateModel(
-            name='Speaker',
+            name="Speaker",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('firstName', models.CharField(max_length=255)),
-                ('lastName', models.CharField(max_length=255)),
-                ('profession', models.CharField(max_length=255)),
-                ('bio', models.TextField()),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("firstName", models.CharField(max_length=255)),
+                ("lastName", models.CharField(max_length=255)),
+                ("profession", models.CharField(max_length=255)),
+                ("bio", models.TextField()),
             ],
         ),
         migrations.CreateModel(
-            name='Sponsor',
+            name="Sponsor",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(max_length=255)),
-                ('logo', models.ImageField(upload_to='sponsor_logos/')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("name", models.CharField(max_length=255)),
+                ("logo", models.ImageField(upload_to="sponsor_logos/")),
             ],
         ),
         migrations.CreateModel(
-            name='UserCheckIn',
+            name="UserCheckIn",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('check_in_time', models.DateTimeField(auto_now_add=True)),
-                ('event', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='eventplannerdb.event')),
-                ('user', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("check_in_time", models.DateTimeField(auto_now_add=True)),
+                (
+                    "event",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to="eventplannerdb.event",
+                    ),
+                ),
+                (
+                    "user",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to=settings.AUTH_USER_MODEL,
+                    ),
+                ),
             ],
         ),
         migrations.CreateModel(
-            name='Survey',
+            name="Survey",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('question', models.CharField(max_length=255)),
-                ('user_response', models.IntegerField(choices=[(1, 'Not Satisfied'), (2, 'Somewhat Satisfied'), (3, 'Neutral'), (4, 'Satisfied'), (5, 'Very Satisfied')])),
-                ('event', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='eventplannerdb.event')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("question", models.CharField(max_length=255)),
+                (
+                    "user_response",
+                    models.IntegerField(
+                        choices=[
+                            (1, "Not Satisfied"),
+                            (2, "Somewhat Satisfied"),
+                            (3, "Neutral"),
+                            (4, "Satisfied"),
+                            (5, "Very Satisfied"),
+                        ]
+                    ),
+                ),
+                (
+                    "event",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to="eventplannerdb.event",
+                    ),
+                ),
             ],
         ),
         migrations.CreateModel(
-            name='EventAgenda',
+            name="EventAgenda",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('title', models.CharField(max_length=255)),
-                ('start_time', models.DateTimeField()),
-                ('end_time', models.DateTimeField()),
-                ('event', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='eventplannerdb.event')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("title", models.CharField(max_length=255)),
+                ("start_time", models.DateTimeField()),
+                ("end_time", models.DateTimeField()),
+                (
+                    "event",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to="eventplannerdb.event",
+                    ),
+                ),
             ],
         ),
         migrations.AddField(
-            model_name='event',
-            name='speakers',
-            field=models.ManyToManyField(related_name='events', to='eventplannerdb.speaker'),
+            model_name="event",
+            name="speakers",
+            field=models.ManyToManyField(related_name="events", to="eventplannerdb.speaker"),
         ),
         migrations.AddField(
-            model_name='event',
-            name='sponsors',
-            field=models.ManyToManyField(related_name='events', to='eventplannerdb.sponsor'),
+            model_name="event",
+            name="sponsors",
+            field=models.ManyToManyField(related_name="events", to="eventplannerdb.sponsor"),
         ),
     ]
