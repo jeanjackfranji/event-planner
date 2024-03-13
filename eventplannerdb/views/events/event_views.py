@@ -1,6 +1,7 @@
-from django.shortcuts import get_object_or_404, redirect
+from django.shortcuts import get_object_or_404, redirect, render
 from django.views.generic import ListView, DetailView, CreateView
 from django.contrib.auth.decorators import login_required
+from django.contrib import messages
 from ...models import Event, Survey, Speaker, Agenda
 from ...forms import SurveyForm
 
@@ -54,6 +55,9 @@ def register_for_event(request, event_id):
     if request.user not in event.registered_users.all():
         event.registered_users.add(request.user)
         event.save()
+        messages.success(request, "You have successfully registered for this event.")
+    else:
+        messages.error(request, "Registration failed. You are already registered for this event.")
 
     return redirect("event_detail", pk=event_id)
 
@@ -64,11 +68,14 @@ def deregister_from_event(request, event_id):
 
     if request.user in event.registered_users.all():
         event.registered_users.remove(request.user)
+        event.save()
+        messages.success(request, "You have successfully de-registered from this event.")
+    else:
+        messages.error(request, "De-Registration failed. You are already not registered for this event.")
 
     if request.user in event.checkedIn_users.all():
         event.checkedIn_users.remove(request.user)
-
-    event.save()
+        event.save()
 
     return redirect("event_detail", pk=event_id)
 
@@ -80,6 +87,9 @@ def check_in_to_event(request, event_id):
     if request.user not in event.checkedIn_users.all():
         event.checkedIn_users.add(request.user)
         event.save()
+        messages.success(request, "You have successfully checked-in to this event.")
+    else:
+        messages.error(request, "check-in failed. You are already checked-in to this event.")
 
     return redirect("event_detail", pk=event_id)
 

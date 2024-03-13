@@ -122,5 +122,114 @@
             "speakers": [2],
             "sponsors": [1]
         }
+    },
+    {
+        "model": "eventplannerdb.agenda",
+        "pk": 1,
+        "fields": {
+            "event": 1,
+            "title": "Opening Keynote",
+            "start_time": "2024-03-09T09:00:00Z",
+            "end_time": "2024-03-09T09:45:00Z"
+        }
+    },
+    {
+        "model": "eventplannerdb.agenda",
+        "pk": 2,
+        "fields": {
+            "event": 1,
+            "title": "Panel Discussion: Future Technologies",
+            "start_time": "2024-03-09T10:00:00Z",
+            "end_time": "2024-03-09T11:30:00Z"
+        }
+    },
+    {
+        "model": "eventplannerdb.agenda",
+        "pk": 3,
+        "fields": {
+            "event": 1,
+            "title": "Networking Break",
+            "start_time": "2024-03-09T11:30:00Z",
+            "end_time": "2024-03-09T12:00:00Z"
+        }
+    },
+    {
+        "model": "eventplannerdb.agenda",
+        "pk": 4,
+        "fields": {
+            "event": 1,
+            "title": "Lunch",
+            "start_time": "2024-03-09T12:00:00Z",
+            "end_time": "2024-03-09T13:00:00Z"
+        }
+    },
+    {
+        "model": "eventplannerdb.agenda",
+        "pk": 5,
+        "fields": {
+            "event": 1,
+            "title": "Workshop: Hands-on AI Applications",
+            "start_time": "2024-03-09T13:00:00Z",
+            "end_time": "2024-03-09T14:30:00Z"
+        }
+    },
+    {
+        "model": "eventplannerdb.survey",
+        "pk": 1,
+        "fields": {
+            "event": 1,
+            "title": "Event Feedback",
+            "methodology": "Event Feedback (5 options)",
+            "is_anonymous": true,
+            "is_active": true
+        }
+    },
+    {
+        "model": "eventplannerdb.surveyquestion",
+        "pk": 1,
+        "fields": {
+            "survey": 1,
+            "question": "How satisfied were you with the event overall?"
+        }
+    },
+    {
+        "model": "eventplannerdb.surveyquestion",
+        "pk": 2,
+        "fields": {
+            "survey": 1,
+            "question": "How helpful were the keynote speeches?"
+        }
+    },
+    {
+        "model": "eventplannerdb.surveyquestion",
+        "pk": 3,
+        "fields": {
+            "survey": 1,
+            "question": "Did the panel discussion meet your expectations?"
+        }
+    },
+    {
+        "model": "eventplannerdb.surveyquestion",
+        "pk": 4,
+        "fields": {
+            "survey": 1,
+            "question": "Would you recommend this event to others?"
+        }
+    },
+    {
+        "model": "eventplannerdb.surveyquestion",
+        "pk": 5,
+        "fields": {
+            "survey": 1,
+            "question": "How likely are you to attend similar events in the future?"
+        }
+    },
+    {
+        "model": "eventplannerdb.surveyquestion",
+        "pk": 6,
+        "fields": {
+            "survey": 1,
+            "question": "Any suggestions for improving future events?"
+        }
     }
 ]

@@ -19,7 +19,14 @@ class Event(models.Model):
     speakers = models.ManyToManyField("Speaker", related_name="events")
     sponsors = models.ManyToManyField("Sponsor", related_name="events")
     registered_users = models.ManyToManyField(User, related_name="registered_events", blank=True)
-    checkedIn_users = models.ManyToManyField(User, related_name="checkedIn_events", blank=True)
+    checkedIn_users = models.ManyToManyField(User, through="CheckIn",
+                                             related_name="checkedIn_events", blank=True)
+
+
+class CheckIn(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    event = models.ForeignKey(Event, on_delete=models.CASCADE)
+    checkin_time = models.DateTimeField(auto_now_add=True)
 
 
 class Speaker(models.Model):
