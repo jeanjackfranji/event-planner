@@ -16,6 +16,7 @@
 </script>
 {% endfor %}
 {% endif %}
+<!-- Represents an Icon and Text to describe the view -->
 <div class="ui stackable grid container">
  <div class="sixteen wide column centered">
   <h5 class="ui center aligned icon header">
@@ -27,6 +28,7 @@
   </h5>
  </div>
 </div>
+<!-- Represents the Event Details Segments with 3 Tabs (Details, Administration, Agenda) -->
 <div class="ui container">
  <h2 class="ui header">
   {{ event.title }}
@@ -227,6 +229,38 @@
   {% endif %}
  </div>
  {% endif %}
+ <div class="ui bottom attached tab segment" data-tab="agenda" style="height: 600px;">
+  <div class="ui grid">
+   <div class="row">
+    <div class="sixteen wide column centered">
+     <h5 class="ui center aligned icon header">
+      Event Time: {{ event.startDateTime|date:"Y-m-d" }}
+     </h5>
+    </div>
+   </div>
+  </div>
+  <div id="calendar">
+  </div>
+ </div>
+ <script>
+  // Initialize calendar view
+   let ec = new EventCalendar(document.getElementById('calendar'), {
+      view: 'listWeek',
+      events: [
+          {% for item in event.agenda.all %}
+          { 
+              editable: false,
+              title: '{{ item.title }}',
+              start: '{{ item.start_time|date:"Y-m-d\TH:i:s" }}',
+              end: '{{ item.end_time|date:"Y-m-d\TH:i:s" }}',
+              backgroundColor: '#B29DD9' // Set event color
+          },
+        {% endfor %}
+      ]
+  });
+  // Change the current date
+  ec.setOption('date', '{{ event.startDateTime|date:"Y-m-d" }}');
+ </script>
 </div>
 <script>
  // Activate tab switching behavior

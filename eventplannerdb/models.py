@@ -20,7 +20,7 @@ class Event(models.Model):
     sponsors = models.ManyToManyField("Sponsor", related_name="events")
     registered_users = models.ManyToManyField(User, related_name="registered_events", blank=True)
     checkedIn_users = models.ManyToManyField(User, through="CheckIn",
-                                             related_name="checkedIn_events", blank=True)
+                                              related_name="checkedIn_events", blank=True)
 
 
 class CheckIn(models.Model):
