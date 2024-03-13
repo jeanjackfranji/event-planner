@@ -1,6 +1,7 @@
 # Event Planner
 
 Event Planner is an app that allows you to organise an event and take care of all the necessary steps needed from an admin perspective.
+Wiki Documentation is available for more details.
 
 ## Description
 
