@@ -65,3 +65,11 @@ This Django project is designed for creating events, schedules, surveys and many
     ```python
     python manage.py loaddata initial_data.json
     ```
+
+11. Run Coverage:
+
+    ```python
+    coverage run --data-file tests/.coverage manage.py test
+    coverage json --data-file tests/.coverage -o buf/tests/coverage.json
+    coverage report --data-file tests/.coverage
+    ```
