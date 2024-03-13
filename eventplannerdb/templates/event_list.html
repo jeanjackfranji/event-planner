@@ -2,42 +2,58 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h2 class="ui header">
- <img src="/images/icons/plugin.png"/>
- <div class="content">
-  <div class="ui search">
-   <form action="{% url 'event_list' %}" class="ui icon input" method="get">
-    <input class="prompt" name="searchInput" placeholder="Search events..." type="text" value="{{ query }}"/>
-    <i class="search icon">
-    </i>
-   </form>
-  </div>
-  <div class="ui divided items">
-   {% if events %}
-   {% for event in events %}
-   <div class="item">
-    <div class="content">
-     <a class="header" href="#">
-      {{ event.title }}
-     </a>
-     <div class="description">
-      {{ event.description }}
-     </div>
-     <div class="meta">
-      {{ event.start_datetime }} - {{ event.end_datetime }}
-     </div>
-     <a href="{% url 'event_detail' pk=event.pk %}">
-      {{ event.title }}
-     </a>
+<div class="ui grid">
+    <div class="row">
+      <div class="sixteen wide column centered">
+        <h4 class="ui center aligned icon header">
+          <i class="calendar purple alternate outline icon"></i>
+          <span style="color: purple !important;">Events</span>
+        </h4>
+      </div>
     </div>
-   </div>
-   {% endfor %}
-   {% else %}
-   <p>
-    No events found.
-   </p>
-   {% endif %}
-  </div>
- </div>
-</h2>
+    <div class="row">
+      <div class="ten wide column centered"></div>
+      <div class="six wide column right aligned" style="margin-right: 20px;">
+        <div class="ui search">
+          <form action="{% url 'event_list' %}" class="ui icon input" method="get">
+           <input class="prompt" name="searchInput" placeholder="Search events..." type="text" value="{{ query }}"/>
+           <i class="search icon">
+           </i>
+          </form>
+         </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="one wide column"></div>
+      <div class="fourteen wide column">
+        <div class="ui divided items">
+          {% if events %}
+          {% for event in events %}
+          <div class="item">
+           <div class="content">
+            <a class="header" href="#">
+             {{ event.title }}
+            </a>
+            <div class="description">
+             {{ event.description }}
+            </div>
+            <div class="meta">
+             {{ event.start_datetime }} - {{ event.end_datetime }}
+            </div>
+            <a href="{% url 'event_detail' pk=event.pk %}">
+             {{ event.title }}
+            </a>
+           </div>
+          </div>
+          {% endfor %}
+          {% else %}
+          <p class="ui center aligned">
+           No events found.
+          </p>
+          {% endif %}
+         </div>
+      </div>
+      <div class="one wide column"></div>
+    </div>
+</div>
 {% endblock %}

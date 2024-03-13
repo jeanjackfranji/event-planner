@@ -1,0 +1,112 @@
+[
+    {
+        "model": "eventplannerdb.speaker",
+        "pk": 1,
+        "fields": {
+            "firstName": "John",
+            "lastName": "Doe",
+            "age": 35,
+            "profession": "Software Engineer",
+            "bio": "Experienced software engineer with a passion for Django development."
+        }
+    },
+    {
+        "model": "eventplannerdb.speaker",
+        "pk": 2,
+        "fields": {
+            "firstName": "Jane",
+            "lastName": "Smith",
+            "age": 28,
+            "profession": "Data Scientist",
+            "bio": "Data scientist specializing in machine learning and analytics."
+        }
+    },
+    {
+        "model": "eventplannerdb.sponsor",
+        "pk": 1,
+        "fields": {
+            "name": "TechCorp",
+            "logo": "techcorp_logo.png"
+        }
+    },
+    {
+        "model": "eventplannerdb.sponsor",
+        "pk": 2,
+        "fields": {
+            "name": "InnovateCo",
+            "logo": "innovateco_logo.png"
+        }
+    },
+    {
+        "model": "eventplannerdb.event",
+        "pk": 1,
+        "fields": {
+            "title": "Tech Summit Part 1",
+            "location": "Conference Center",
+            "startDateTime": "2024-03-09T09:00:00Z",
+            "endDateTime": "2024-03-09T18:00:00Z",
+            "speakers": [1, 2],
+            "sponsors": [1, 2]
+        }
+    },
+    {
+        "model": "eventplannerdb.event",
+        "pk": 2,
+        "fields": {
+            "title": "Tech Summit Part 2",
+            "location": "Conference Center",
+            "startDateTime": "2024-03-10T09:00:00Z",
+            "endDateTime": "2024-03-10T18:00:00Z",
+            "speakers": [1, 2],
+            "sponsors": [1, 2]
+        }
+    },
+    {
+        "model": "eventplannerdb.event",
+        "pk": 3,
+        "fields": {
+            "title": "Data Science Expo",
+            "location": "Exhibition Hall",
+            "startDateTime": "2024-04-15T10:00:00Z",
+            "endDateTime": "2024-04-15T16:00:00Z",
+            "speakers": [2],
+            "sponsors": [1]
+        }
+    },
+    {
+        "model": "eventplannerdb.event",
+        "pk": 4,
+        "fields": {
+            "title": "Web Development Workshop",
+            "location": "Training Center",
+            "startDateTime": "2024-05-20T13:00:00Z",
+            "endDateTime": "2024-05-20T17:00:00Z",
+            "speakers": [1],
+            "sponsors": [2]
+        }
+    },
+    {
+        "model": "eventplannerdb.event",
+        "pk": 5,
+        "fields": {
+            "title": "AI Conference",
+            "location": "Convention Center",
+            "startDateTime": "2024-06-25T09:30:00Z",
+            "endDateTime": "2024-06-25T17:30:00Z",
+            "speakers": [1, 2],
+            "sponsors": [1, 2]
+        }
+    },
+    {
+        "model": "eventplannerdb.event",
+        "pk": 6,
+        "fields": {
+            "title": "Startup Pitch Day",
+            "location": "Innovation Hub",
+            "startDateTime": "2024-07-10T14:00:00Z",
+            "endDateTime": "2024-07-10T18:00:00Z",
+            "speakers": [2],
+            "sponsors": [1]
+        }
+    }
+]
